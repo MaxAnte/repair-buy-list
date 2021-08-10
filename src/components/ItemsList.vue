@@ -1,16 +1,19 @@
 <template>
   <ul class="items-list">
-    <li class="list-head">
+    <li :class="type === 'parameters' ? 'params-head' : 'list-head'">
       <div class="head-id">#</div>
       <div class="head-name">Name</div>
-      <div class="head-quantity">Quantity</div>
-      <div class="head-price">Price</div>
+      <div class="head-quantity" v-if="type === 'pricing'">Quantity</div>
+      <div class="head-length" v-else>Length</div>
+      <div class="head-price" v-if="type === 'pricing'">Price</div>
+      <div class="head-price" v-else>Width</div>
+      <div class="head-price" v-if="type === 'parameters'">Height</div>
     </li>
-    <Item class="list-item" v-for="item in items" :item="item" />
-    <AddItem />
+    <Item class="list-item" v-for="item in items" :item="item" :type="type" />
+    <AddItem :type="type" />
   </ul>
 
-  <Overall :items="items" />
+  <Overall :items="items" v-if="type === 'pricing'" />
 </template>
 
 <script>
@@ -28,6 +31,10 @@ export default {
       type: Array,
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
@@ -36,6 +43,15 @@ export default {
 .list-head {
   display: grid;
   grid-template-columns: 0.2fr 1fr 0.3fr 0.3fr;
+  font-size: 14px;
+  color: #7b7b7b;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+.params-head {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 0.3fr 0.3fr 0.3fr;
   font-size: 14px;
   color: #7b7b7b;
   padding: 10px 0px;

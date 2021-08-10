@@ -8,8 +8,26 @@
       <h5>Add Item</h5>
       <form>
         <input type="text" id="name" placeholder="Name of item" />
-        <input type="number" id="price" placeholder="Price per item" />
-        <input type="text" id="quantity" placeholder="Quantity" />
+        <input
+          type="number"
+          id="price"
+          placeholder="Price per item"
+          v-if="type === 'pricing'"
+        />
+        <input type="number" id="length" placeholder="Length" v-else />
+        <input
+          type="text"
+          id="quantity"
+          placeholder="Quantity"
+          v-if="type === 'pricing'"
+        />
+        <input type="number" id="width" placeholder="Width" v-else />
+        <input
+          type="text"
+          id="height"
+          placeholder="Height"
+          v-if="type === 'parameters'"
+        />
         <button type="submit" class="btn">Save</button>
       </form>
     </div>
@@ -26,14 +44,28 @@ export default {
   data() {
     return {
       openForm: false,
+      item: {
+        name: "",
+        quantity: "",
+        price: 0,
+        width: 0,
+        height: 0,
+        length: 0,
+      },
     };
+  },
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
 
 <style scoped>
 .add-item {
-  margin: 15px 0px;
+  margin-top: 15px;
 }
 .btn {
   background: #5f4b8bff;

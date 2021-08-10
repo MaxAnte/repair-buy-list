@@ -1,9 +1,16 @@
 <template>
-  <li class="list-item">
+  <li :class="type === 'parameters' ? 'params-list-item' : 'list-item'">
     <div class="item-id">{{ item.id }}.</div>
     <div class="item-name">{{ item.name }}</div>
-    <div class="item-quantity">{{ item.quantity }}</div>
-    <div class="item-price">{{ item.price }}</div>
+    <div class="item-quantity" v-if="type === 'pricing'">
+      {{ item.quantity }}
+    </div>
+    <div class="item-length" v-else>{{ item.length }}</div>
+    <div class="item-price" v-if="type === 'pricing'">{{ item.price }}</div>
+    <div class="item-width" v-else>{{ item.width }}</div>
+    <div class="item-height" v-if="type === 'parameters'">
+      {{ item.height }}
+    </div>
   </li>
 </template>
 
@@ -14,6 +21,10 @@ export default {
       type: Object,
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
@@ -22,6 +33,14 @@ export default {
 .list-item {
   display: grid;
   grid-template-columns: 0.2fr 1fr 0.3fr 0.3fr;
+  font-size: 18px;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+.params-list-item {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 0.3fr 0.3fr 0.3fr;
   font-size: 18px;
   padding: 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
