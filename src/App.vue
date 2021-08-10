@@ -1,22 +1,78 @@
 <template>
   <div class="container">
-    <h1>Some title</h1>
+    <Header />
+    <ItemsList :items="items" />
+    <Footer />
   </div>
 </template>
 
-<script></script>
+<script>
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ItemsList from "./components/ItemsList";
+export default {
+  components: {
+    Header,
+    ItemsList,
+    Footer,
+  },
+  data() {
+    return {
+      items: [
+        { id: 1, name: "Paint", quantity: "2", price: 1200 },
+        { id: 2, name: "Sand", quantity: "1", price: 400 },
+        { id: 3, name: "Light", quantity: "5", price: 1000 },
+        { id: 4, name: "Table", quantity: "3", price: 4000 },
+      ],
+    };
+  },
+};
+</script>
 
 <style>
+@import "./vars.css";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #333333;
+  background-image: url("./assets/bg.png");
+  height: 100%;
 }
 .container {
   max-width: 1200px;
   padding: 0px 15px;
+  height: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+ul {
+  list-style: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input {
+  background: #ffffff;
+  padding: 5px 10px;
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  outline: none;
 }
 </style>
