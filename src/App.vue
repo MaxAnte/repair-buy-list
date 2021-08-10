@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <Header />
-    <ItemsList :items="items" />
+    <Tabs />
+    <router-view />
     <Footer />
   </div>
 </template>
@@ -9,22 +10,13 @@
 <script>
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ItemsList from "./components/ItemsList";
+import Tabs from "./components/Tabs";
+
 export default {
   components: {
     Header,
-    ItemsList,
     Footer,
-  },
-  data() {
-    return {
-      items: [
-        { id: 1, name: "Paint", quantity: "2", price: 1200 },
-        { id: 2, name: "Sand", quantity: "1", price: 400 },
-        { id: 3, name: "Light", quantity: "5", price: 1000 },
-        { id: 4, name: "Table", quantity: "3", price: 4000 },
-      ],
-    };
+    Tabs,
   },
 };
 </script>

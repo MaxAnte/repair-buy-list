@@ -40,6 +40,7 @@ export default {
   box-shadow: 0px 0px 20px 20px rgba(95, 75, 139, 0.15);
   margin-top: 35px;
   text-align: left;
+  border-radius: 10px;
 }
 .overall h4 {
   font-size: 22px;
