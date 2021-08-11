@@ -6,29 +6,49 @@
         <CloseIcon width="12px" height="12px" />
       </span>
       <h5>Add Item</h5>
-      <form>
-        <input type="text" id="name" placeholder="Name of item" />
+      <form @submit.prevent>
+        <input
+          type="text"
+          id="name"
+          placeholder="Name of item"
+          v-model="item.name"
+        />
         <input
           type="number"
           id="price"
           placeholder="Price per item"
           v-if="type === 'pricing'"
+          v-model="item.price"
         />
-        <input type="number" id="length" placeholder="Length" v-else />
+        <input
+          type="number"
+          id="length"
+          placeholder="Length"
+          v-else
+          v-model="item.length"
+        />
         <input
           type="text"
           id="quantity"
           placeholder="Quantity"
           v-if="type === 'pricing'"
+          v-model="item.quantity"
         />
-        <input type="number" id="width" placeholder="Width" v-else />
+        <input
+          type="number"
+          id="width"
+          placeholder="Width"
+          v-else
+          v-model="item.width"
+        />
         <input
           type="text"
           id="height"
           placeholder="Height"
           v-if="type === 'parameters'"
+          v-model="item.height"
         />
-        <button type="submit" class="btn">Save</button>
+        <button type="submit" class="btn" @click="createItem">Save</button>
       </form>
     </div>
     <div class="popup-bg" v-if="openForm" @click="this.openForm = false"></div>
@@ -41,23 +61,38 @@ export default {
   components: {
     CloseIcon,
   },
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       openForm: false,
       item: {
         name: "",
         quantity: "",
-        price: 0,
-        width: 0,
-        height: 0,
-        length: 0,
+        price: "",
+        width: "",
+        height: "",
+        length: "",
       },
     };
   },
-  props: {
-    type: {
-      type: String,
-      required: true,
+  methods: {
+    createItem() {
+      this.item.id = Date.now();
+      this.$emit("create", this.item);
+      this.openForm = false;
+      this.item = {
+        name: "",
+        quantity: "",
+        price: "",
+        width: "",
+        height: "",
+        length: "",
+      };
     },
   },
 };

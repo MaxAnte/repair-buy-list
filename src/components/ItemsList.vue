@@ -9,8 +9,14 @@
       <div class="head-price" v-else>Width</div>
       <div class="head-price" v-if="type === 'parameters'">Height</div>
     </li>
-    <Item class="list-item" v-for="item in items" :item="item" :type="type" />
-    <AddItem :type="type" />
+    <Item
+      class="list-item"
+      v-for="(item, index) in items"
+      :item="item"
+      :index="index"
+      :type="type"
+    />
+    <AddItem :type="type" @create="createItem" />
   </ul>
 
   <Overall :items="items" v-if="type === 'pricing'" />
@@ -34,6 +40,11 @@ export default {
     type: {
       type: String,
       required: true,
+    },
+  },
+  methods: {
+    createItem(item) {
+      this.$emit("create", item);
     },
   },
 };

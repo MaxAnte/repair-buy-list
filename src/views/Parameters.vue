@@ -1,5 +1,5 @@
 <template>
-  <ItemsList :items="items" type="parameters" />
+  <ItemsList :items="items" type="parameters" @create="createItem" />
 </template>
 
 <script>
@@ -18,6 +18,11 @@ export default {
         { id: 5, name: "Room", length: 200, width: 200, height: 200 },
       ],
     };
+  },
+  methods: {
+    createItem(item) {
+      this.items.push(item);
+    },
   },
 };
 </script>

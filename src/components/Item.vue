@@ -1,6 +1,6 @@
 <template>
   <li :class="type === 'parameters' ? 'params-list-item' : 'list-item'">
-    <div class="item-id">{{ item.id }}.</div>
+    <div class="item-id">{{ index + 1 }}.</div>
     <div class="item-name">{{ item.name }}</div>
     <div class="item-quantity" v-if="type === 'pricing'">
       {{ item.quantity }}
@@ -20,6 +20,9 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+    index: {
+      type: Number,
     },
     type: {
       type: String,
