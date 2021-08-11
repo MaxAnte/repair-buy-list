@@ -1,7 +1,10 @@
 <template>
   <div class="overall">
-    <h4>
-      Overall cost: <span class="ovr-price">{{ overallPrice }}</span>
+    <h4 v-if="type === 'pricing'">
+      Overall cost: <span class="ovr">{{ overall }} UAH</span>
+    </h4>
+    <h4 v-else>
+      Overall squares: <span class="ovr">{{ overall }} ㎡</span>
     </h4>
   </div>
 </template>
@@ -13,18 +16,26 @@ export default {
       type: Array,
       required: true,
     },
+    type: {
+      type: String,
+    },
   },
   data() {
     return {
-      overallPrice: 0,
+      overall: 0,
     };
   },
   methods: {
     calcOverall() {
-      const ovr = this.items
-        .map((el) => el.price)
-        .reduce((prev, cur) => (prev += cur));
-      this.overallPrice = ovr;
+      const ovr =
+        this.type === "pricing"
+          ? this.items
+              .map((el) => el.price)
+              .reduce((prev, cur) => (prev += cur))
+          : this.items
+              .map((el) => (el.width * el.length) / 10000)
+              .reduce((prev, cur) => (prev += cur));
+      this.overall = ovr;
     },
   },
   beforeMount() {
@@ -46,7 +57,7 @@ export default {
   font-size: 22px;
   font-weight: 400;
 }
-.ovr-price {
+.ovr {
   color: #5f4b8bff;
   font-weight: 700;
   font-size: 26px;

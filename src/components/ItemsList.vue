@@ -7,7 +7,7 @@
       <div class="head-length" v-else>Length</div>
       <div class="head-price" v-if="type === 'pricing'">Price</div>
       <div class="head-price" v-else>Width</div>
-      <div class="head-price" v-if="type === 'parameters'">Height</div>
+      <div class="head-price" v-if="type === 'parameters'">㎡</div>
     </li>
     <Item
       class="list-item"
@@ -19,7 +19,7 @@
     <AddItem :type="type" @create="createItem" />
   </ul>
 
-  <Overall :items="items" v-if="type === 'pricing'" />
+  <Overall :items="items" :type="type" />
 </template>
 
 <script>
@@ -62,7 +62,8 @@ export default {
 }
 .params-head {
   display: grid;
-  grid-template-columns: 0.2fr 1fr 0.3fr 0.3fr 0.3fr;
+  grid-template-columns: 0.2fr 1fr 0.4fr 0.4fr 0.4fr;
+  align-items: end;
   font-size: 14px;
   color: #7b7b7b;
   padding: 10px 0px;

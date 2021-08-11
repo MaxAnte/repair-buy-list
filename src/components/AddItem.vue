@@ -23,7 +23,7 @@
         <input
           type="number"
           id="length"
-          placeholder="Length"
+          placeholder="Length, cm"
           v-else
           v-model="item.length"
         />
@@ -37,16 +37,9 @@
         <input
           type="number"
           id="width"
-          placeholder="Width"
+          placeholder="Width, cm"
           v-else
           v-model="item.width"
-        />
-        <input
-          type="text"
-          id="height"
-          placeholder="Height"
-          v-if="type === 'parameters'"
-          v-model="item.height"
         />
         <button type="submit" class="btn" @click="createItem">Save</button>
       </form>
