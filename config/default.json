@@ -1,5 +1,5 @@
 {
   "port": 5000,
   "jwtSecret": "The team is secret",
-  "mongoUri": "mongodb+srv://zigzag:123qwe@app.oeoif.mongodb.net/app?retryWrites=true&w=majority"
+  "mongoUri": "mongodb+srv://zigzag:123qwe@app.54oq7.mongodb.net/app?retryWrites=true&w=majority"
 }
