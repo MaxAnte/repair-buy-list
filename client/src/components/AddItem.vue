@@ -74,9 +74,35 @@ export default {
     };
   },
   methods: {
-    createItem() {
-      this.item.id = Date.now();
-      this.$emit("create", this.item);
+    async createItem() {
+      try {
+        const body =
+          this.type === "parameters"
+            ? {
+                name: this.item.name,
+                width: this.item.width,
+                length: this.item.length,
+              }
+            : {
+                name: this.item.name,
+                quantity: this.item.quantity,
+                price: this.item.price,
+              };
+        await fetch(
+          `/api/add-${this.type === "parameters" ? "param" : "item"}`,
+          {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-Type": "application/json",
+              accept: "application/json",
+            },
+          }
+        );
+      } catch (e) {
+        console.error("Error on fetch from component:", e.message);
+      }
+
       this.openForm = false;
       this.item = {
         name: "",

@@ -16,7 +16,7 @@
       :index="index"
       :type="type"
     />
-    <AddItem :type="type" @create="createItem" />
+    <AddItem :type="type" />
   </ul>
 
   <Overall :items="items" :type="type" />
@@ -42,18 +42,13 @@ export default {
       required: true,
     },
   },
-  methods: {
-    createItem(item) {
-      this.$emit("create", item);
-    },
-  },
 };
 </script>
 
 <style scoped>
 .list-head {
   display: grid;
-  grid-template-columns: 0.2fr 1fr 0.3fr 0.3fr;
+  grid-template-columns: 0.1fr 1fr 0.2fr 0.1fr 0.1fr;
   font-size: 14px;
   color: #7b7b7b;
   padding: 10px 0px;
@@ -62,7 +57,7 @@ export default {
 }
 .params-head {
   display: grid;
-  grid-template-columns: 0.2fr 1fr 0.4fr 0.4fr 0.4fr;
+  grid-template-columns: 0.1fr 1fr 0.2fr 0.2fr 0.1fr 0.1fr;
   align-items: end;
   font-size: 14px;
   color: #7b7b7b;

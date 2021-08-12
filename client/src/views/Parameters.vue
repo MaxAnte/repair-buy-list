@@ -1,5 +1,5 @@
 <template>
-  <ItemsList :items="items" type="parameters" @create="createItem" />
+  <ItemsList :items="items" type="parameters" />
 </template>
 
 <script>
@@ -10,19 +10,22 @@ export default {
   },
   data() {
     return {
-      items: [
-        { id: 1, name: "Room", length: 200, width: 200, height: 200 },
-        { id: 2, name: "Room", length: 200, width: 200, height: 200 },
-        { id: 3, name: "Room", length: 200, width: 200, height: 200 },
-        { id: 4, name: "Room", length: 200, width: 200, height: 200 },
-        { id: 5, name: "Room", length: 200, width: 200, height: 200 },
-      ],
+      items: [{ name: "Room", length: 0, width: 0 }],
     };
   },
   methods: {
-    createItem(item) {
-      this.items.push(item);
+    async getParams() {
+      try {
+        const response = await fetch("/api/params");
+        const data = await response.json();
+        this.items = Object.values(data);
+      } catch (e) {
+        console.error("Error on fetch from component:", e.message);
+      }
     },
+  },
+  beforeMount() {
+    this.getParams();
   },
 };
 </script>

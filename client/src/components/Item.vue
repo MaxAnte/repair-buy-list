@@ -11,11 +11,18 @@
     <div class="item-squares" v-if="type === 'parameters'">
       {{ squares }}
     </div>
+    <div class="item-delete" @click="deleteItem(item.name)">
+      <DeleteIcon width="20px" height="20px" />
+    </div>
   </li>
 </template>
 
 <script>
+import DeleteIcon from "../UI/DeleteIcon";
 export default {
+  components: {
+    DeleteIcon,
+  },
   props: {
     item: {
       type: Object,
@@ -36,7 +43,24 @@ export default {
   },
   methods: {
     countSquares() {
-      this.squares = (this.item.width * this.item.length) / 10000;
+      this.squares = Math.ceil((this.item.width * this.item.length) / 10000);
+    },
+    async deleteItem(name) {
+      try {
+        await fetch(
+          `/api/delete-${this.type === "parameters" ? "param" : "item"}`,
+          {
+            method: "POST",
+            body: JSON.stringify({ name }),
+            headers: {
+              "Content-Type": "application/json",
+              accept: "application/json",
+            },
+          }
+        );
+      } catch (e) {
+        console.error("Error on fetch from component:", e.message);
+      }
     },
   },
   mounted() {
@@ -48,7 +72,7 @@ export default {
 <style scoped>
 .list-item {
   display: grid;
-  grid-template-columns: 0.2fr 1fr 0.3fr 0.3fr;
+  grid-template-columns: 0.1fr 1fr 0.2fr 0.1fr 0.1fr;
   font-size: 18px;
   padding: 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -56,7 +80,7 @@ export default {
 }
 .params-list-item {
   display: grid;
-  grid-template-columns: 0.2fr 1fr 0.4fr 0.4fr 0.4fr;
+  grid-template-columns: 0.1fr 1fr 0.2fr 0.2fr 0.1fr 0.1fr;
   font-size: 18px;
   padding: 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -71,5 +95,8 @@ export default {
 }
 .item-name {
   text-align: left;
+}
+.item-delete {
+  cursor: pointer;
 }
 </style>
