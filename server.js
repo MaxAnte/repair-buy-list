@@ -29,6 +29,9 @@ const MONGO_URI =
     ? config.get("mongoUri")
     : process.env.MONGO_URI;
 
+console.log("PORT:", PORT);
+console.log("MONGO_URI:", MONGO_URI);
+
 async function start() {
   try {
     await mongoose.connect(MONGO_URI, {
