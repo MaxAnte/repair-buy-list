@@ -81,6 +81,7 @@ export default {
 .params-list-item {
   display: grid;
   grid-template-columns: 0.1fr 1fr 0.2fr 0.2fr 0.1fr 0.1fr;
+  grid-gap: 2px;
   font-size: 18px;
   padding: 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -98,5 +99,19 @@ export default {
 }
 .item-delete {
   cursor: pointer;
+}
+@media (max-width: 500px) {
+  .list-item {
+    font-size: 16px !important;
+    grid-template-columns: 0.1fr 1fr 0.3fr 0.3fr 0.1fr !important;
+  }
+  .params-list-item {
+    font-size: 16px !important;
+    grid-template-columns: 0.1fr 1fr 0.3fr 0.3fr 0.3fr 0.1fr !important;
+  }
+  .item-delete svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 </style>

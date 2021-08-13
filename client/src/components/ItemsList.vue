@@ -58,6 +58,7 @@ export default {
 .params-head {
   display: grid;
   grid-template-columns: 0.1fr 1fr 0.2fr 0.2fr 0.1fr 0.1fr;
+  grid-gap: 2px;
   align-items: end;
   font-size: 14px;
   color: #7b7b7b;
@@ -73,5 +74,16 @@ export default {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 500px) {
+  .list-head {
+    font-size: 12px !important;
+    grid-template-columns: 0.1fr 1fr 0.3fr 0.3fr 0.1fr !important;
+  }
+  .params-head {
+    font-size: 12px !important;
+    grid-template-columns: 0.1fr 1fr 0.3fr 0.3fr 0.3fr 0.1fr !important;
+  }
 }
 </style>
