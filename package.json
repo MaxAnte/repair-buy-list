@@ -19,9 +19,9 @@
   "author": "Max Zahorskyi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MaxAnte/team-statz/issues"
+    "url": "https://github.com/MaxAnte/repair-buy-list/issues"
   },
-  "homepage": "https://github.com/MaxAnte/team-statz#readme",
+  "homepage": "https://github.com/MaxAnte/repair-buy-list#readme",
   "dependencies": {
     "config": "^3.3.6",
     "dotenv": "^10.0.0",
