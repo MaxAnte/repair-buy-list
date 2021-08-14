@@ -1,10 +1,12 @@
 <template>
   <div class="overall">
     <h4 v-if="type === 'pricing'">
-      Overall cost: <span class="ovr">{{ overall }} UAH</span>
+      Overall cost:
+      <span class="ovr">{{ $store.getters.sumOfPrices }} UAH</span>
     </h4>
     <h4 v-else>
-      Overall squares: <span class="ovr">{{ overall }} ㎡</span>
+      Overall squares:
+      <span class="ovr">{{ $store.getters.sumOfSquareMeters }} ㎡</span>
     </h4>
   </div>
 </template>
@@ -12,34 +14,9 @@
 <script>
 export default {
   props: {
-    items: {
-      type: Array,
-      required: true,
-    },
     type: {
       type: String,
     },
-  },
-  data() {
-    return {
-      overall: 0,
-    };
-  },
-  methods: {
-    calcOverall() {
-      const ovr =
-        this.type === "pricing"
-          ? this.items
-              .map((el) => el.price)
-              .reduce((prev, cur) => (prev += cur))
-          : this.items
-              .map((el) => (el.width * el.length) / 10000)
-              .reduce((prev, cur) => (prev += cur));
-      this.overall = ovr;
-    },
-  },
-  beforeMount() {
-    this.calcOverall();
   },
 };
 </script>

@@ -19,7 +19,7 @@
     <AddItem :type="type" />
   </ul>
 
-  <Overall :items="items" :type="type" />
+  <Overall :type="type" />
 </template>
 
 <script>

@@ -8,24 +8,13 @@ export default {
   components: {
     ItemsList,
   },
-  data() {
-    return {
-      items: [{ name: "", quantity: 0, price: 0 }],
-    };
-  },
-  methods: {
-    async getItems() {
-      try {
-        const response = await fetch("/api/items");
-        const data = await response.json();
-        this.items = Object.values(data);
-      } catch (e) {
-        console.error("Error on fetch from component:", e.message);
-      }
+  computed: {
+    items() {
+      return this.$store.state.items;
     },
   },
-  beforeMount() {
-    this.getItems();
+  mounted() {
+    this.$store.dispatch("getItems");
   },
 };
 </script>

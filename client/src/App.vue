@@ -31,6 +31,8 @@ export default {
 body {
   height: 100vh;
   width: 100vw;
+  background-image: url("./assets/bg.png");
+  overflow-x: hidden;
 }
 #app {
   font-family: "Roboto", sans-serif;
@@ -38,7 +40,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #333333;
-  background-image: url("./assets/bg.png");
   height: 100%;
 }
 .container {
