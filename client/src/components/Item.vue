@@ -61,6 +61,7 @@ export default {
       } catch (e) {
         console.error("Error on fetch from component:", e.message);
       }
+      this.$store.dispatch("getItems");
     },
   },
   mounted() {

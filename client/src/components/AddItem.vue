@@ -104,6 +104,7 @@ export default {
       }
 
       this.openForm = false;
+      this.$store.dispatch("getItems");
       this.item = {
         name: "",
         quantity: "",
