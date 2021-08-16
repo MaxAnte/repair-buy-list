@@ -16,3 +16,17 @@ export default {
   },
 };
 </script>
+
+<style>
+.locale-changer {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+select {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 5px;
+}
+</style>

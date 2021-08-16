@@ -18,5 +18,6 @@ export default {
 footer {
   margin-top: auto;
   padding: 25px 0px;
+  position: relative;
 }
 </style>
