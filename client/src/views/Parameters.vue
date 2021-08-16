@@ -10,7 +10,7 @@ export default {
   },
   computed: {
     params() {
-      return this.$store.state.params;
+      return this.$store.getters.sortedParams;
     },
   },
   mounted() {

@@ -9,17 +9,25 @@ export default createStore({
     sumOfPrices(state) {
       if (state.items.length) {
         return state.items
-          .map((el) => el.price)
-          .reduce((prev, cur) => (prev += cur));
+          .map((el) => el.price * el.quantity)
+          .reduce((prev, cur) => (prev += cur))
+          .toFixed(2);
       }
     },
     sumOfSquareMeters(state) {
       if (state.params.length) {
         return state.params
           .map((el) => (el.width * el.length) / 10000)
-          .reduce((prev, cur) => (prev += cur));
+          .reduce((prev, cur) => (prev += cur))
+          .toFixed(2);
       }
     },
+    sortedItems(state) {
+      return state.items.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+    },
+    sortedParams(state) {
+      return state.params.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+    }
   },
   mutations: {
     SET_ITEMS(state, items) {
