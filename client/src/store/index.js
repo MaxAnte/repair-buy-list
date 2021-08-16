@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     items: [],
-    params: [],
+    rooms: [],
   },
   getters: {
     sumOfPrices(state) {
@@ -15,26 +15,30 @@ export default createStore({
       }
     },
     sumOfSquareMeters(state) {
-      if (state.params.length) {
-        return state.params
+      if (state.rooms.length) {
+        return state.rooms
           .map((el) => (el.width * el.length) / 10000)
           .reduce((prev, cur) => (prev += cur))
           .toFixed(2);
       }
     },
     sortedItems(state) {
-      return state.items.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+      return state.items.sort((a, b) =>
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+      );
     },
-    sortedParams(state) {
-      return state.params.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
-    }
+    sortedRooms(state) {
+      return state.rooms.sort((a, b) =>
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+      );
+    },
   },
   mutations: {
     SET_ITEMS(state, items) {
       state.items = items;
     },
-    SET_PARAMS(state, params) {
-      state.params = params;
+    SET_ROOMS(state, rooms) {
+      state.rooms = rooms;
     },
   },
   actions: {
@@ -47,11 +51,11 @@ export default createStore({
         console.error("Error on fetch from component:", e.message);
       }
     },
-    async getParams({ commit }) {
+    async getRooms({ commit }) {
       try {
-        const response = await fetch("/api/params");
+        const response = await fetch("/api/rooms");
         const data = await response.json();
-        commit("SET_PARAMS", Object.values(data));
+        commit("SET_ROOMS", Object.values(data));
       } catch (e) {
         console.error("Error on fetch from component:", e.message);
       }

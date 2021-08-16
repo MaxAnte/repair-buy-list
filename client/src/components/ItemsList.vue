@@ -1,13 +1,17 @@
 <template>
   <ul class="items-list">
-    <li :class="type === 'parameters' ? 'params-head' : 'list-head'">
+    <li :class="type === 'rooms' ? 'rooms-head' : 'list-head'">
       <div class="head-id">#</div>
-      <div class="head-name">Name</div>
-      <div class="head-quantity" v-if="type === 'pricing'">Quantity</div>
-      <div class="head-length" v-else>Length</div>
-      <div class="head-price" v-if="type === 'pricing'">Price</div>
-      <div class="head-price" v-else>Width</div>
-      <div class="head-price" v-if="type === 'parameters'">㎡</div>
+      <div class="head-name">{{ $t("name") }}</div>
+      <div class="head-quantity" v-if="type === 'materials'">
+        {{ $t("quantity") }}
+      </div>
+      <div class="head-length" v-else>{{ $t("length") }}</div>
+      <div class="head-price" v-if="type === 'materials'">
+        {{ $t("price") }}
+      </div>
+      <div class="head-price" v-else>{{ $t("width") }}</div>
+      <div class="head-price" v-if="type === 'rooms'">{{ $t("㎡") }}</div>
     </li>
     <Item
       class="list-item"
@@ -26,7 +30,15 @@
 import Item from "./Item";
 import AddItem from "./AddItem";
 import Overall from "./Overall";
+import { useI18n } from "vue-i18n";
 export default {
+  setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t };
+  },
   components: {
     Item,
     AddItem,
@@ -55,7 +67,7 @@ export default {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 }
-.params-head {
+.rooms-head {
   display: grid;
   grid-template-columns: 0.1fr 1fr 0.2fr 0.2fr 0.1fr 0.1fr;
   grid-gap: 2px;
@@ -81,7 +93,7 @@ export default {
     font-size: 12px !important;
     grid-template-columns: 0.1fr 1fr 0.3fr 0.3fr 0.1fr !important;
   }
-  .params-head {
+  .rooms-head {
     font-size: 12px !important;
     grid-template-columns: 0.1fr 1fr 0.3fr 0.3fr 0.3fr 0.1fr !important;
   }

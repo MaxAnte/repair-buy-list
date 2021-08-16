@@ -1,47 +1,49 @@
 <template>
   <div class="add-item">
-    <button class="btn" @click="this.openForm = true">Add</button>
+    <button class="btn" @click="this.openForm = true">{{ $t("add") }}</button>
     <div class="add-item-popup" v-if="openForm">
       <span class="close" @click="this.openForm = false">
         <CloseIcon width="12px" height="12px" />
       </span>
-      <h5>Add Item</h5>
+      <h5>{{ $t("add") }} {{ $t("material") }}</h5>
       <form @submit.prevent>
         <input
           type="text"
           id="name"
-          placeholder="Name of item"
+          :placeholder="$t('name-of-material')"
           v-model="item.name"
         />
         <input
           type="number"
           id="price"
-          placeholder="Price per item"
-          v-if="type === 'pricing'"
+          :placeholder="$t('price-per-item')"
+          v-if="type === 'materials'"
           v-model="item.price"
         />
         <input
           type="number"
           id="length"
-          placeholder="Length, cm"
+          :placeholder="($t('length'), $t('cm'))"
           v-else
           v-model="item.length"
         />
         <input
           type="text"
           id="quantity"
-          placeholder="Quantity"
-          v-if="type === 'pricing'"
+          :placeholder="$t('quantity')"
+          v-if="type === 'materials'"
           v-model="item.quantity"
         />
         <input
           type="number"
           id="width"
-          placeholder="Width, cm"
+          :placeholder="($t('width'), $t('cm'))"
           v-else
           v-model="item.width"
         />
-        <button type="submit" class="btn" @click="createItem">Save</button>
+        <button type="submit" class="btn" @click="createItem">
+          {{ $t("save") }}
+        </button>
       </form>
     </div>
     <div class="popup-bg" v-if="openForm" @click="this.openForm = false"></div>
@@ -50,7 +52,15 @@
 
 <script>
 import CloseIcon from "../UI/CloseIcon";
+import { useI18n } from "vue-i18n";
 export default {
+  setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t };
+  },
   components: {
     CloseIcon,
   },
@@ -77,7 +87,7 @@ export default {
     async createItem() {
       try {
         const body =
-          this.type === "parameters"
+          this.type === "rooms"
             ? {
                 name: this.item.name,
                 width: this.item.width,
@@ -88,17 +98,14 @@ export default {
                 quantity: this.item.quantity,
                 price: this.item.price,
               };
-        await fetch(
-          `/api/add-${this.type === "parameters" ? "param" : "item"}`,
-          {
-            method: "POST",
-            body: JSON.stringify(body),
-            headers: {
-              "Content-Type": "application/json",
-              accept: "application/json",
-            },
-          }
-        );
+        await fetch(`/api/add-${this.type === "rooms" ? "room" : "item"}`, {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+          },
+        });
       } catch (e) {
         console.error("Error on fetch from component:", e.message);
       }

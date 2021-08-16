@@ -8,9 +8,9 @@ const routes = [
     component: List,
   },
   {
-    path: "/params",
-    name: "Parameters",
-    component: () => import("../views/Parameters"),
+    path: "/rooms",
+    name: "Rooms",
+    component: () => import("../views/Rooms"),
   },
 ];
 

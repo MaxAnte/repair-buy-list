@@ -1,0 +1,20 @@
+{
+  "overall-cost": "Overall cost",
+  "overall-squares": "Overall squares",
+  "materials": "Materials",
+  "rooms": "Rooms",
+  "add": "Add",
+  "material": "Material",
+  "name-of-material": "Name of material",
+  "price-per-item": "Price per item",
+  "length": "Length",
+  "width": "Width",
+  "cm": "cm",
+  "m": "m",
+  "㎡": "㎡",
+  "UAH": "UAH",
+  "name": "Name",
+  "quantity": "Quantity",
+  "price": "Price",
+  "save": "Save"
+}

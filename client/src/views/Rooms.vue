@@ -1,5 +1,5 @@
 <template>
-  <ItemsList :items="params" type="parameters" />
+  <ItemsList :items="rooms" type="rooms" />
 </template>
 
 <script>
@@ -9,12 +9,12 @@ export default {
     ItemsList,
   },
   computed: {
-    params() {
-      return this.$store.getters.sortedParams;
+    rooms() {
+      return this.$store.getters.sortedRooms;
     },
   },
   mounted() {
-    this.$store.dispatch("getParams");
+    this.$store.dispatch("getRooms");
   },
 };
 </script>

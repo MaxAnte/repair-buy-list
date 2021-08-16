@@ -1,16 +1,25 @@
 <template>
   <div class="tabs">
     <router-link class="tab-link" to="/">
-      <span>Pricing</span>
+      <span>{{ $t("materials") }}</span>
     </router-link>
-    <router-link class="tab-link" to="/params">
-      <span>Parameters</span>
+    <router-link class="tab-link" to="/rooms">
+      <span>{{ $t("rooms") }}</span>
     </router-link>
   </div>
 </template>
 
 <script>
-export default {};
+import { useI18n } from "vue-i18n";
+export default {
+  setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t };
+  },
+};
 </script>
 
 <style scoped>

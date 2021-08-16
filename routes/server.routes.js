@@ -39,10 +39,10 @@ router.post("/delete-item", [], async (req, res) => {
   }
 });
 
-router.get("/params", [], async (req, res) => {
+router.get("/rooms", [], async (req, res) => {
   try {
     const params = await Param.find({});
-    if (!params) return res.status(400).json({ message: "Params not found" });
+    if (!params) return res.status(400).json({ message: "Rooms not found" });
     res.json({ ...params });
   } catch (e) {
     console.error("Error on fetch items:", e.message);

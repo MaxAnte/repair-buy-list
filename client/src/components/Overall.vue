@@ -1,18 +1,28 @@
 <template>
   <div class="overall">
-    <h4 v-if="type === 'pricing'">
-      Overall cost:
-      <span class="ovr">{{ $store.getters.sumOfPrices }} UAH</span>
+    <h4 v-if="type === 'materials'">
+      {{ $t("overall-cost") }}:
+      <span class="ovr">{{ $store.getters.sumOfPrices }} {{ $t("UAH") }}</span>
     </h4>
     <h4 v-else>
-      Overall squares:
-      <span class="ovr">{{ $store.getters.sumOfSquareMeters }} ㎡</span>
+      {{ $t("overall-squares") }}:
+      <span class="ovr"
+        >{{ $store.getters.sumOfSquareMeters }} {{ $t("㎡") }}</span
+      >
     </h4>
   </div>
 </template>
 
 <script>
+import { useI18n } from "vue-i18n";
 export default {
+  setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t };
+  },
   props: {
     type: {
       type: String,

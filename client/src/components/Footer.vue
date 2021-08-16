@@ -1,11 +1,17 @@
 <template>
   <footer>
     <p>© Max Zahorskyi, 2021</p>
+    <LangSwitch />
   </footer>
 </template>
 
 <script>
-export default {};
+import LangSwitch from "./LangSwitch";
+export default {
+  components: {
+    LangSwitch,
+  },
+};
 </script>
 
 <style scoped>
