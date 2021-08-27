@@ -90,6 +90,7 @@ export default {
 .list-item {
   display: grid;
   grid-template-columns: 0.1fr 1fr 0.2fr 0.1fr 0.1fr;
+  align-items: center;
   font-size: 18px;
   padding: 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -144,6 +145,17 @@ export default {
   .item-delete svg {
     width: 16px;
     height: 16px;
+  }
+  .item-tags {
+    flex-direction: column;
+    margin: 0px 5px;
+    width: 100%;
+    max-width: 80px;
+  }
+  .item-tag {
+    width: 100%;
+    margin: 1px 0px;
+    text-align: center;
   }
 }
 </style>
