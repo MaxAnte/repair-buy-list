@@ -1,7 +1,18 @@
 <template>
   <li :class="type === 'rooms' ? 'rooms-list-item' : 'list-item'">
     <div class="item-id">{{ index + 1 }}.</div>
-    <div class="item-name">{{ item.name }}</div>
+    <div class="item-name">
+      <div class="item-tags">
+        <span
+          class="item-tag"
+          v-if="type === 'materials'"
+          v-for="tag in item.tags"
+        >
+          {{ tag }}
+        </span>
+      </div>
+      {{ item.name }}
+    </div>
     <div class="item-quantity" v-if="type === 'materials'">
       {{ item.quantity }}
     </div>
@@ -102,9 +113,24 @@ export default {
 }
 .item-name {
   text-align: left;
+  display: flex;
+  align-items: center;
 }
 .item-delete {
   cursor: pointer;
+}
+.item-tags {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+.item-tag {
+  font-size: 10px;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background-color: #0cc10c;
+  margin-right: 2px;
+  color: #fff;
 }
 @media (max-width: 500px) {
   .list-item {
