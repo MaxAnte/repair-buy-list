@@ -41,6 +41,13 @@
           v-else
           v-model="item.width"
         />
+        <input
+          type="text"
+          id="tags"
+          :placeholder="$t('categories')"
+          v-if="type === 'materials'"
+          v-model="item.tags"
+        />
         <button type="submit" class="btn" @click="createItem">
           {{ $t("save") }}
         </button>
@@ -80,6 +87,7 @@ export default {
         width: "",
         height: "",
         length: "",
+        tags: "",
       },
     };
   },
@@ -97,6 +105,7 @@ export default {
                 name: this.item.name,
                 quantity: this.item.quantity,
                 price: this.item.price,
+                tags: this.item.tags.split(",").map((el) => el.trim()),
               };
         await fetch(`/api/add-${this.type === "rooms" ? "room" : "item"}`, {
           method: "POST",
@@ -119,6 +128,7 @@ export default {
         width: "",
         height: "",
         length: "",
+        tags: "",
       };
     },
   },
