@@ -17,7 +17,12 @@
       {{ item.quantity }}
     </div>
     <div class="item-length" v-else>{{ item.length / 100 }}{{ $t("m") }}</div>
-    <div class="item-price" v-if="type === 'materials'">{{ item.price }}</div>
+    <div class="item-price" v-if="type === 'materials'">
+      {{ item.price }}
+      <span class="item-price__sum" v-if="item.quantity > 1">{{
+        item.price * item.quantity
+      }}</span>
+    </div>
     <div class="item-width" v-else>{{ item.width / 100 }}{{ $t("m") }}</div>
     <div class="item-squares" v-if="type === 'rooms'">
       {{ squares }}
@@ -132,6 +137,32 @@ export default {
   background-color: #0cc10c;
   margin-right: 2px;
   color: #fff;
+}
+.item-price {
+  position: relative;
+  cursor: pointer;
+}
+.item-price:hover > .item-price__sum {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: all 0.3s ease;
+}
+.item-price__sum {
+  padding: 3px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(15px);
+  box-shadow: 0px 0px 20px 10px rgb(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 @media (max-width: 500px) {
   .list-item {
