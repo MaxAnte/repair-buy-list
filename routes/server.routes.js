@@ -16,13 +16,9 @@ router.get("/items", [], async (req, res) => {
 
 router.post("/add-item", [], async (req, res) => {
   try {
-    const { name, quantity, price } = req.body;
-    const item = new Item();
-    item.name = name;
-    item.quantity = quantity;
-    item.price = price;
+    const item = new Item(req.body);
     await item.save();
-    res.status(201).json({ message: `${name} has been added!` });
+    res.status(201).json({ message: `${req.body.name} has been added!` });
   } catch (e) {
     console.error("Error on fetch items:", e.message);
   }
@@ -33,7 +29,6 @@ router.post("/delete-item", [], async (req, res) => {
     const { name } = req.body;
     await Item.deleteOne({ name });
     res.status(201).json({ message: `${name} has been removed!` });
-    await item.save();
   } catch (e) {
     console.error("Error on fetch items:", e.message);
   }
