@@ -24,6 +24,21 @@ router.post("/add-item", [], async (req, res) => {
   }
 });
 
+router.post("/edit-item", [], async (req, res) => {
+  try {
+    const { _id, name, price, quantity, tags } = req.body;
+    const item = await Item.findOne({ _id });
+    item.name = name;
+    item.price = price;
+    item.quantity = quantity;
+    item.tags = tags;
+    await item.save();
+    res.status(201).json({ message: `${name} has been changed!` });
+  } catch (e) {
+    console.error("Error on fetch items:", e.message);
+  }
+});
+
 router.post("/delete-item", [], async (req, res) => {
   try {
     const { name } = req.body;
@@ -57,6 +72,16 @@ router.post("/add-param", [], async (req, res) => {
     console.error("Error on fetch items:", e.message);
   }
 });
+
+// router.post("/edit-param", [], async (req, res) => {
+//   try {
+//     const item = new Item(req.body);
+//     await item.save();
+//     res.status(201).json({ message: `${req.body.name} has been added!` });
+//   } catch (e) {
+//     console.error("Error on fetch items:", e.message);
+//   }
+// });
 
 router.post("/delete-param", [], async (req, res) => {
   try {

@@ -1,5 +1,8 @@
 <template>
-  <li :class="type === 'rooms' ? 'rooms-list-item' : 'list-item'">
+  <li
+    :class="type === 'rooms' ? 'rooms-list-item' : 'list-item'"
+    @click="this.editPopup = true"
+  >
     <div class="item-id">{{ index + 1 }}.</div>
     <div class="item-name">
       <div class="item-tags">
@@ -31,10 +34,17 @@
       <DeleteIcon width="20px" height="20px" />
     </div>
   </li>
+  <EditPopup
+    :type="type"
+    :itemInfo="item"
+    v-if="type === 'materials' && editPopup === true"
+    @closeEditPopup="editPopup = false"
+  />
 </template>
 
 <script>
 import DeleteIcon from "../UI/DeleteIcon";
+import EditPopup from "./EditPopup";
 import { useI18n } from "vue-i18n";
 export default {
   setup() {
@@ -46,6 +56,7 @@ export default {
   },
   components: {
     DeleteIcon,
+    EditPopup,
   },
   props: {
     item: {
@@ -63,6 +74,7 @@ export default {
   data() {
     return {
       squares: "",
+      editPopup: false,
     };
   },
   methods: {
@@ -99,6 +111,7 @@ export default {
   font-size: 18px;
   padding: 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 .rooms-list-item {
