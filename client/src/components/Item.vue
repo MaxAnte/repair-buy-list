@@ -5,12 +5,8 @@
   >
     <div class="item-id">{{ index + 1 }}.</div>
     <div class="item-name">
-      <div class="item-tags">
-        <span
-          class="item-tag"
-          v-if="type === 'materials'"
-          v-for="tag in item.tags"
-        >
+      <div class="item-tags" v-if="type === 'materials'">
+        <span class="item-tag" v-for="tag in item.tags" :key="tag">
           {{ tag }}
         </span>
       </div>
@@ -23,7 +19,7 @@
     <div class="item-price" v-if="type === 'materials'">
       {{ item.price }}
       <span class="item-price__sum" v-if="item.quantity > 1">{{
-        item.price * item.quantity
+        (item.price * item.quantity).toFixed(2)
       }}</span>
     </div>
     <div class="item-width" v-else>{{ item.width / 100 }}{{ $t("m") }}</div>

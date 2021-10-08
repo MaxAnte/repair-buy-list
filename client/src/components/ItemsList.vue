@@ -16,6 +16,7 @@
     <Item
       class="list-item"
       v-for="(item, index) in items"
+      :key="item.name"
       :item="item"
       :index="index"
       :type="type"
